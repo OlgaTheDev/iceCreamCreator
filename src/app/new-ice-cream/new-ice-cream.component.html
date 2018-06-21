@@ -1,0 +1,36 @@
+<div class="container-fluid fill new-ice-cream">
+  <div class="row h-100">
+
+    <div class="col-xs-12 col-sm-5 h-100 left">
+        <app-ice-cream-preview></app-ice-cream-preview>
+    </div>
+    
+    <div class="col-xs-12 col-sm-7 h-100 right">
+      <div class="content-wrapper">
+
+        <p class="lead">Choose ice-cream type</p>
+
+        <div class="links-inline">
+            <a class="square-link" 
+              routerLink="cone" 
+              routerLinkActive="active">
+              <img src="../../assets/images/cone.svg" alt="">
+              Cone</a>
+          <a class="square-link" 
+              routerLink="stick" 
+              routerLinkActive="active">
+              <img src="../../assets/images/stick.svg" alt="">
+              Stick</a>
+        </div>
+
+        <hr>
+        
+        <router-outlet></router-outlet>
+
+    </div>
+  </div>
+</div>
+
+<div class="sl-preview">
+    <app-shopping-list-preview></app-shopping-list-preview>
+</div>

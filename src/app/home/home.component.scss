@@ -1,0 +1,12 @@
+.jumbotron{
+    background-color: beige;
+}
+
+a{
+    font-size: 2rem;
+    display: block;
+
+    &:hover{
+        text-decoration: none;
+    }
+}

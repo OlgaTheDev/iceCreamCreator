@@ -1,0 +1,20 @@
+p{
+    font-size: 12px;
+    text-align: center;
+
+    span{
+        font-weight: bold;
+    }
+}
+
+img{
+    width: 60px;
+    margin: 0 auto;
+    display: block;
+}
+
+a{
+    &:hover{
+        text-decoration: none;
+    }
+}
