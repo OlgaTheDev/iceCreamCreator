@@ -1,8 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 
-import { ConeIceCream } from '../cone-ice-cream.model';
-import { StickIceCream } from '../stick-ice-cream.model';
 import { ShoppingListService } from './shopping-list.service';
+import { IceCream } from '../ice-cream.model';
 
 @Component({
   selector: 'app-shopping-list',
@@ -13,15 +12,16 @@ export class ShoppingListComponent implements OnInit {
 
   constructor(private slService: ShoppingListService) { }
 
-  shoppingList: (ConeIceCream|StickIceCream)[];
+  shoppingList: IceCream[];
 
   ngOnInit() {
     this.shoppingList = this.slService.shoppingList;
 
     this.slService.shoppingListUpdated
       .subscribe(
-        (updatedShoppingList: (ConeIceCream|StickIceCream)[]) => {
+        (updatedShoppingList: IceCream[]) => {
           this.shoppingList = updatedShoppingList;
+          console.log(updatedShoppingList)
         }
       )
   }

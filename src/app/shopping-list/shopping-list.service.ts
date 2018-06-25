@@ -1,16 +1,15 @@
 import { Subject } from 'rxjs';
 
-import { ConeIceCream } from '../cone-ice-cream.model';
-import { StickIceCream } from '../stick-ice-cream.model';
+import { IceCream } from '../ice-cream.model';
 
 
 export class ShoppingListService {
 
-    shoppingList: (ConeIceCream|StickIceCream)[] = [];
+    shoppingList: IceCream[] = [];
 
-    shoppingListUpdated = new Subject<(ConeIceCream|StickIceCream)[]>();
+    shoppingListUpdated = new Subject<IceCream[]>();
 
-    addToShoppingList(item: ConeIceCream | StickIceCream) {
+    addToShoppingList(item: IceCream) {
         this.shoppingList.push(item);
         this.shoppingListUpdated.next(this.shoppingList);
     }

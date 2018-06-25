@@ -1,4 +1,5 @@
 import { Flavour } from "./flavour.model";
+import { IceCreamType } from "./type.model";
 
 export class HttpService {
 
@@ -12,11 +13,20 @@ export class HttpService {
 
     scoops: number[] = [1, 2, 3];
 
+    types: IceCreamType[] = [
+        {name: 'cone', imgPath: '../../assets/images/cone.svg'},
+        {name: 'stick', imgPath: '../../assets/images/stick.svg'}
+    ];
+
     getFlavours() {
         return this.flavours;
     }
 
     getScoops() {
         return this.scoops;
+    }
+
+    getTypes() {
+        return this.types;
     }
 }
