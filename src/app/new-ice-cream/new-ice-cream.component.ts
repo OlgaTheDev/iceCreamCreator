@@ -1,6 +1,6 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
-import { FormControl, FormGroup } from '@angular/forms';
+import { FormControl, FormGroup, Validators } from '@angular/forms';
 
 import { IceCreamService } from '../ice-cream.service';
 import { HttpService } from '../http.service';
@@ -8,6 +8,7 @@ import { IceCreamType } from '../type.model';
 import { Flavour } from '../flavour.model';
 import { ShoppingListService } from '../shopping-list/shopping-list.service';
 import { IceCream } from '../ice-cream.model';
+import { Shape } from '../shape.model';
 
 @Component({
   selector: 'app-new-ice-cream',
@@ -15,8 +16,6 @@ import { IceCream } from '../ice-cream.model';
   styleUrls: ['./new-ice-cream.component.scss']
 })
 export class NewIceCreamComponent implements OnInit {
-
-  // @ViewChild('f') form: NgForm;
 
   constructor(private iceCreamService: IceCreamService, 
               private http: HttpService,
@@ -29,22 +28,23 @@ export class NewIceCreamComponent implements OnInit {
   scoops: number[];
   iceCreamTypeChosen: string;
   flavourChosen: string;
-  scoopsAmountChosen: number;
+  scoopsAmountChosen: number = 1;
+  shapes: Shape[];
+  shapeChosen: string = 'oval';
 
 
   icForm = new FormGroup({
-    typeChosen: new FormControl(),
-    scoopsAmountChosen: new FormControl(),
-    flavourChosen: new FormControl({
-      value: '',
-      disabled: !this.scoopsAmountChosen
-    })}
-  )
+    typeChosen: new FormControl(null, Validators.required),
+    scoopsAmountChosen: new FormControl({value: 1}),
+    flavourChosen: new FormControl(null, Validators.required),
+    shapeChosen: new FormControl({value: 'oval'})
+  })
 
   ngOnInit() {    
     
     this.iceCreamType = this.http.getTypes();
     this.flavours = this.http.getFlavours();
+    this.shapes = this.http.getShapes();
 
     this.icForm.valueChanges
       .subscribe(
@@ -52,12 +52,18 @@ export class NewIceCreamComponent implements OnInit {
           if(formValues.typeChosen) {
             if(this.iceCreamTypeChosen !== formValues.typeChosen) {
               this.icForm.reset();
+              if (formValues.typeChosen === 'cone') {
+                this.scoopsAmountChosen = 1;
+              } else {
+                this.shapeChosen = 'oval';
+              }
             }
             this.iceCreamTypeChosen = formValues.typeChosen;
 
             const queryParams: Params = Object.assign({});
             queryParams['flav'] = null;
             queryParams['scoops'] = null;
+            queryParams['shape'] = null;
 
             if(this.flavourChosen) {
               queryParams['flav'] = this.flavourChosen;
@@ -66,6 +72,10 @@ export class NewIceCreamComponent implements OnInit {
             if(this.iceCreamTypeChosen === 'cone') {
               if(this.scoopsAmountChosen) {
                 queryParams['scoops'] = this.scoopsAmountChosen;
+              }
+            } else {
+              if(this.shapeChosen) {
+                queryParams['shape'] = this.shapeChosen;
               }
             }
 
@@ -84,8 +94,10 @@ export class NewIceCreamComponent implements OnInit {
 
             if(this.iceCreamTypeChosen === 'cone') {
               this.scoops = this.http.getScoops();
+              this.shapes = null;
             } else {
               this.scoops = null;
+              this.shapes = this.http.getShapes();
             }
           }
         }
@@ -96,6 +108,7 @@ export class NewIceCreamComponent implements OnInit {
       (params: ParamMap) => {
         this.scoopsAmountChosen = +params.get('scoops') || null;
         this.flavourChosen = params.get('flav') || null;
+        this.shapeChosen = params.get('shape') || null;
       }
     )
 
@@ -104,7 +117,7 @@ export class NewIceCreamComponent implements OnInit {
   onAddIceCream() {
     this.flavourChosen = this.icForm.value.flavourChosen;
     this.scoopsAmountChosen = this.icForm.value.scoopsAmountChosen;
-    let newIceCream = new IceCream(this.iceCreamTypeChosen, this.flavourChosen, this.scoopsAmountChosen);
+    let newIceCream = new IceCream(this.iceCreamTypeChosen, this.flavourChosen, this.scoopsAmountChosen, this.shapeChosen);
     this.slService.addToShoppingList(newIceCream);
     this.icForm.reset();
     this.router.navigate(['/new'], {queryParams: {}});

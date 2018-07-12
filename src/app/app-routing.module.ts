@@ -7,7 +7,6 @@ import { NewIceCreamComponent } from './new-ice-cream/new-ice-cream.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { StartComponent } from './new-ice-cream/start/start.component';
-import { CustomizeComponent } from './new-ice-cream/customize/customize.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent, pathMatch: 'full'},

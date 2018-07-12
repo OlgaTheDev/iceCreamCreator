@@ -1,9 +1,16 @@
-<h1>Shopping list</h1>
-<ul class="list-group">
-  <li class="list-group-item"
-      *ngFor="let item of shoppingList; index as i"> 
-      <span>{{ item.type | titlecase }} ice-cream </span>/
-      <span>{{ item.flavour }} flavour </span>/
-      <span>{{ item.scoopsAmount }} scoops</span>
-    </li>
-</ul>
+<div class="container-fluid">
+<div class="row">
+  <div class="col">
+    <h1>Shopping list</h1>
+    <ul class="list-group">
+      <li class="list-group-item"
+          *ngFor="let item of shoppingList; index as i"> 
+          <span>{{ item.type | titlecase }} ice-cream </span>/
+          <span>{{ item.flavour }} flavour </span>/
+          <span *ngIf="item.scoopsAmount">{{ item.scoopsAmount }} scoop(s)</span>
+          <span *ngIf="item.shape">{{ item.shape }} shape</span>
+        </li>
+    </ul>
+  </div>
+</div>
+</div>

@@ -21,7 +21,6 @@ export class ShoppingListComponent implements OnInit {
       .subscribe(
         (updatedShoppingList: IceCream[]) => {
           this.shoppingList = updatedShoppingList;
-          console.log(updatedShoppingList)
         }
       )
   }

@@ -14,7 +14,7 @@ import { ShoppingListService } from './shopping-list/shopping-list.service';
 import { ShoppingListPreviewComponent } from './new-ice-cream/shopping-list-preview/shopping-list-preview.component';
 import { StartComponent } from './new-ice-cream/start/start.component';
 import { IceCreamPreviewComponent } from './new-ice-cream/ice-cream-preview/ice-cream-preview.component';
-import { CustomizeComponent } from './new-ice-cream/customize/customize.component';
+import { SummaryComponent } from './new-ice-cream/summary/summary.component';
 
 
 @NgModule({
@@ -27,8 +27,8 @@ import { CustomizeComponent } from './new-ice-cream/customize/customize.componen
     ShoppingListPreviewComponent,
     StartComponent,
     IceCreamPreviewComponent,
-    CustomizeComponent
-  ],
+    SummaryComponent
+    ],
   imports: [
     BrowserModule,
     AppRouting,

@@ -14,8 +14,7 @@
                         name="typeChosen"
                         [value]="type.name"
                         formControlName="typeChosen"
-                        required
-                        >
+                        required>
                     <label class="form-check-label" 
                             [for]="type.name">
                         <img [src]="type.imgPath" alt="">
@@ -33,15 +32,30 @@
                         name="scoopsAmountChosen"
                         formControlName="scoopsAmountChosen"
                         [value]="scoop"
-                        [(ngModel)]="scoopsAmountChosen"
-                        required
-                        >
+                        [(ngModel)]="scoopsAmountChosen">
                     <label class="form-check-label square-label" 
                             for=scoop-{{i}}>
                     {{ scoop }}</label>
                 </div>
                 <hr>
             </div>
+
+            <div class="form-group-wrapper" *ngIf="shapes">
+                    <p class="lead">What shape?</p>
+                    <div class="form-check-inline" *ngFor="let shape of shapes; index as i">
+                        <input type="radio"
+                            class="hidden-input" 
+                            [id]="shape.name"
+                            formControlName="shapeChosen"
+                            [value]="shape.name"
+                            [(ngModel)]="shapeChosen">
+                        <label class="form-check-label" 
+                                [for]="shape.name">
+                            <img [src]="shape.imgPath" [alt]="shape.name">
+                        {{ shape.name | titlecase }}</label>
+                    </div>
+                    <hr>
+                </div>
 
             <div class="form-group-wrapper">
                 <p class="lead">Choose flavour</p>
@@ -53,12 +67,11 @@
                         formControlName="flavourChosen"
                         [value]="flav.name"
                         [(ngModel)]="flavourChosen"
-                        required
-                        >
+                        required>
                         
                     <label class="form-check-label" 
                             [for]="flav.name">
-                    <img [src]="flav.imgPath" alt="">
+                    <img [src]="flav.imgPath" [alt]="flav.name">
                     {{ flav.name | titlecase }}</label>
                 </div>
                 <hr>
@@ -71,6 +84,8 @@
                 Add to shopping cart</button>
         
         </form>
+
+        <app-summary></app-summary>
 
     </div>
 
