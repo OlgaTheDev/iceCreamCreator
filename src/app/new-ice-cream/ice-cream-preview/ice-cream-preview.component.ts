@@ -1,4 +1,4 @@
-import { Component, OnInit, AfterViewInit } from '@angular/core';
+import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
 
 import { IceCreamService } from '../../ice-cream.service';
@@ -17,11 +17,8 @@ export class IceCreamPreviewComponent implements OnInit {
               private router: Router,
               private http: HttpService ) { }
 
-  iceCreamTypeChosen: string;
-  scoopsAmountChosen: number;
-  flavourColorChosen: string[] = ['rgb(238, 238, 238)', 'rgb(221, 221, 221)'];
   flavours: Flavour[];
-  shapeChosen: string;
+  showInfoText: boolean = true;
 
   ngOnInit() {
 
@@ -31,7 +28,11 @@ export class IceCreamPreviewComponent implements OnInit {
       .subscribe(
         (params: ParamMap) => {
           const type = params.get('type');
-          this.initPreview(type);
+          if (type) {
+            this.showInfoText = false;
+            this.initPreview();
+            this.initType(type, document.getElementById('preview'));
+          }
         }
       )
 
@@ -53,85 +54,75 @@ export class IceCreamPreviewComponent implements OnInit {
       )
 
   }
-
-  ngAfterViewInit() {
-    this.route.queryParamMap
-      .subscribe(
-        (params: ParamMap) => {
-        }
-      )
-  }
  
-  private initPreview(type) {
+  private initPreview() {
     const parent = document.getElementById('preview-wrapper');
-    const oldSvg = document.getElementById('preview');
-
-    if(oldSvg) {
-      parent.removeChild(oldSvg);
-    }
 
     const svg = document.createElementNS("http://www.w3.org/2000/svg", "svg");
     svg.setAttributeNS(null,"id", "preview");
     svg.setAttributeNS(null,"x", "0");
     svg.setAttributeNS(null,"y", "0");
     svg.setAttributeNS(null,"viewBox", "0 0 512 512");
-    const iceCreamType = document.createElementNS('http://www.w3.org/2000/svg',"g");
-    if (type === 'cone') {
-      this.initCone(iceCreamType);
-    } else {
-      this.initStick(iceCreamType);
-    }
-    svg.appendChild(iceCreamType);
     
     parent.appendChild(svg);
   }
 
-  private initCone(parent) {
-    const conePath1 = document.createElementNS('http://www.w3.org/2000/svg',"path");
-    const conePath2 = document.createElementNS('http://www.w3.org/2000/svg',"polygon");
-    const conePath3 = document.createElementNS('http://www.w3.org/2000/svg',"path");
+  private initType(type, parent) {
+    this.destroyOldSvg(document.getElementsByClassName('type'), parent);
+
+    if (type === 'cone') {
+      const cone = document.createElementNS('http://www.w3.org/2000/svg',"g");
+      cone.setAttributeNS(null, "class", "type");
+
+      const conePath1 = document.createElementNS('http://www.w3.org/2000/svg',"path");
+      const conePath2 = document.createElementNS('http://www.w3.org/2000/svg',"polygon");
+      const conePath3 = document.createElementNS('http://www.w3.org/2000/svg',"path");
+      
+      conePath1.setAttributeNS(null, "d", "M343.293,256.66l-0.286,0.899l-5.267,16.558l-5.309,16.733h-0.017l-68.413,215.296  c-1.235,3.907-4.611,5.855-7.998,5.855c-3.377,0-6.771-1.948-8.005-5.855l-32.485-102.217l-41.255-129.812l-1.537-4.83l-3.73-11.727  l-0.151-0.479l-0.135-0.42L343.293,256.66L343.293,256.66z");  
+      conePath1.setAttributeNS(null, "fill", "#FFD41D");
+      conePath2.setAttributeNS(null, "points", "343.293,257.08 339.277,269.286 172.723,269.286 168.993,257.558 168.841,257.08");  
+      conePath2.setAttributeNS(null, "fill", "#FFA91F");
+      conePath3.setAttributeNS(null, "d", "M236.573,403.928l-41.255-129.812l-1.537-4.83l-3.73-11.727l-0.151-0.479l-0.135-0.42h-21.058   l0.135,0.42l0.151,0.479l3.73,11.727l1.537,4.83l41.255,129.812l32.485,102.217c1.235,3.907,4.629,5.855,8.005,5.855   c3.385,0,6.763-1.948,7.998-5.855l2.527-7.954L236.573,403.928z");
+      conePath3.setAttributeNS(null, "fill", "#FFA91F");
+  
+      cone.appendChild(conePath1);
+      cone.appendChild(conePath2);
+      cone.appendChild(conePath3);
+
+      parent.appendChild(cone);
+
+    } else {
+      const stick = document.createElementNS('http://www.w3.org/2000/svg',"g");
+      stick.setAttributeNS(null, "class", "type");
+
+      const stickPath1 = document.createElementNS('http://www.w3.org/2000/svg',"path");
+      const stickPath2 = document.createElementNS('http://www.w3.org/2000/svg',"path");
+      const stickPath3 = document.createElementNS('http://www.w3.org/2000/svg',"rect");
+  
+      stickPath1.setAttributeNS(null, "d", "M290.554,352.865v124.587c0,19.087-15.473,34.548-34.548,34.548  c-19.087,0-34.548-15.461-34.548-34.548V352.865H290.554z");
+      stickPath1.setAttributeNS(null, "fill", "#F9DB87");
+      stickPath2.setAttributeNS(null, "d", "M245.08,477.452V355.227h-23.623v122.224c0,19.087,15.461,34.548,34.548,34.548   c4.147,0,8.124-0.732,11.809-2.073C254.55,505.103,245.08,492.388,245.08,477.452z")
+      stickPath2.setAttributeNS(null, "fill", "#E5B94C");
+      stickPath3.setAttributeNS(null, "x", "221.464");
+      stickPath3.setAttributeNS(null, "y", "355.227");
+      stickPath3.setAttributeNS(null, "width", "69.097");
+      stickPath3.setAttributeNS(null, "height", "27.048");
+      stickPath3.setAttributeNS(null, "fill", "#E5B94C");
+  
+      stick.appendChild(stickPath1);
+      stick.appendChild(stickPath2);
+      stick.appendChild(stickPath3);
+
+      parent.appendChild(stick);
+    }
     
-    conePath1.setAttributeNS(null, "d", "M343.293,256.66l-0.286,0.899l-5.267,16.558l-5.309,16.733h-0.017l-68.413,215.296  c-1.235,3.907-4.611,5.855-7.998,5.855c-3.377,0-6.771-1.948-8.005-5.855l-32.485-102.217l-41.255-129.812l-1.537-4.83l-3.73-11.727  l-0.151-0.479l-0.135-0.42L343.293,256.66L343.293,256.66z");  
-    conePath1.setAttributeNS(null, "fill", "#FFD41D");
-    conePath2.setAttributeNS(null, "points", "343.293,257.08 339.277,269.286 172.723,269.286 168.993,257.558 168.841,257.08");  
-    conePath2.setAttributeNS(null, "fill", "#FFA91F");
-    conePath3.setAttributeNS(null, "d", "M236.573,403.928l-41.255-129.812l-1.537-4.83l-3.73-11.727l-0.151-0.479l-0.135-0.42h-21.058   l0.135,0.42l0.151,0.479l3.73,11.727l1.537,4.83l41.255,129.812l32.485,102.217c1.235,3.907,4.629,5.855,8.005,5.855   c3.385,0,6.763-1.948,7.998-5.855l2.527-7.954L236.573,403.928z");
-    conePath3.setAttributeNS(null, "fill", "#FFA91F");
-
-    parent.appendChild(conePath1);
-    parent.appendChild(conePath2);
-    parent.appendChild(conePath3);
-  }
-
-  private initStick(parent) {
-    const stickPath1 = document.createElementNS('http://www.w3.org/2000/svg',"path");
-    const stickPath2 = document.createElementNS('http://www.w3.org/2000/svg',"path");
-    const stickPath3 = document.createElementNS('http://www.w3.org/2000/svg',"rect");
-
-    stickPath1.setAttributeNS(null, "d", "M290.554,352.865v124.587c0,19.087-15.473,34.548-34.548,34.548  c-19.087,0-34.548-15.461-34.548-34.548V352.865H290.554z");
-    stickPath1.setAttributeNS(null, "fill", "#F9DB87");
-    stickPath2.setAttributeNS(null, "d", "M245.08,477.452V355.227h-23.623v122.224c0,19.087,15.461,34.548,34.548,34.548   c4.147,0,8.124-0.732,11.809-2.073C254.55,505.103,245.08,492.388,245.08,477.452z")
-    stickPath2.setAttributeNS(null, "fill", "#E5B94C");
-    stickPath3.setAttributeNS(null, "x", "221.464");
-    stickPath3.setAttributeNS(null, "y", "355.227");
-    stickPath3.setAttributeNS(null, "width", "69.097");
-    stickPath3.setAttributeNS(null, "height", "27.048");
-    stickPath3.setAttributeNS(null, "fill", "#E5B94C");
-
-    parent.appendChild(stickPath1);
-    parent.appendChild(stickPath2);
-    parent.appendChild(stickPath3);
   }
 
   initScoops(scoopsAmount, parent) {
-    const oldSvg = document.getElementById('scoops');
-
-    if(oldSvg) {
-      parent.removeChild(oldSvg);
-    }
+    this.destroyOldSvg(document.getElementsByClassName('form'), parent);
 
     const scoops = document.createElementNS('http://www.w3.org/2000/svg',"g");
-    scoops.setAttributeNS(null, "id", "scoops");
+    scoops.setAttributeNS(null, "class", "form");
 
     const scoopPath1 = document.createElementNS('http://www.w3.org/2000/svg',"path");
     const scoopPath2 = document.createElementNS('http://www.w3.org/2000/svg',"path");
@@ -175,14 +166,10 @@ export class IceCreamPreviewComponent implements OnInit {
   }
 
   initShape(shapeChosen, parent) {
-    const oldSvg = document.getElementById('shape');
-
-    if(oldSvg) {
-      parent.removeChild(oldSvg);
-    }
+    this.destroyOldSvg(document.getElementsByClassName('form'), parent);
 
     const shape = document.createElementNS('http://www.w3.org/2000/svg',"g");
-    shape.setAttributeNS(null, "id", "shape");
+    shape.setAttributeNS(null, "class", "form");
 
     if (shapeChosen === 'oval') {
       const shapePath1 = document.createElementNS('http://www.w3.org/2000/svg',"path");
@@ -231,6 +218,14 @@ export class IceCreamPreviewComponent implements OnInit {
 
     parent.appendChild(shape);
 
+  }
+
+  private destroyOldSvg(oldSvg, parent) {
+    if(oldSvg.length) {
+      for(let i = 0; i <= oldSvg.length; i++) {
+        parent.removeChild(oldSvg[i])
+      }
+    }
   }
 
   private determineFlavourColors(flavChosen) {
