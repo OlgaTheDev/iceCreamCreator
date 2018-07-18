@@ -2,7 +2,6 @@ import { Component, OnInit, ViewChild } from '@angular/core';
 import { ActivatedRoute, Router, ParamMap, Params } from '@angular/router';
 import { FormControl, FormGroup, Validators } from '@angular/forms';
 
-import { IceCreamService } from '../ice-cream.service';
 import { HttpService } from '../http.service';
 import { IceCreamType } from '../type.model';
 import { Flavour } from '../flavour.model';
@@ -17,8 +16,7 @@ import { Shape } from '../shape.model';
 })
 export class NewIceCreamComponent implements OnInit {
 
-  constructor(private iceCreamService: IceCreamService, 
-              private http: HttpService,
+  constructor(private http: HttpService,
               private slService: ShoppingListService,
               private route: ActivatedRoute,
               private router: Router) { }
@@ -115,9 +113,19 @@ export class NewIceCreamComponent implements OnInit {
   }
 
   onAddIceCream() {
-    this.flavourChosen = this.icForm.value.flavourChosen;
-    this.scoopsAmountChosen = this.icForm.value.scoopsAmountChosen;
-    let newIceCream = new IceCream(this.iceCreamTypeChosen, this.flavourChosen, this.scoopsAmountChosen, this.shapeChosen);
+    // const iceCreamCreated = {
+    //   type: this.route.snapshot.params['type'],
+    //   scoops: this.route.snapshot.queryParams['scoops'],
+    //   flav: this.route.snapshot.queryParams['flav'],
+    //   shape: this.route.snapshot.queryParams['shape']
+    // }
+
+    let newIceCream = new IceCream(
+      this.iceCreamTypeChosen, 
+      this.flavourChosen, 
+      this.scoopsAmountChosen, 
+      this.shapeChosen
+    );
     this.slService.addToShoppingList(newIceCream);
     this.icForm.reset();
     this.router.navigate(['/new'], {queryParams: {}});

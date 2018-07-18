@@ -5,7 +5,6 @@ export class IceCream {
     constructor( public type: string,
                 public flavour: string, 
                 public scoopsAmount: number,
-                public shape: string
-                ) {}
+                public shape: string) {}
 
 }

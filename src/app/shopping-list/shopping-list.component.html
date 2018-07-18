@@ -4,7 +4,8 @@
     <h1>Shopping list</h1>
     <ul class="list-group">
       <li class="list-group-item"
-          *ngFor="let item of shoppingList; index as i"> 
+          *ngFor="let item of shoppingList"> 
+          <span class="svg-wrapper"></span>
           <span>{{ item.type | titlecase }} ice-cream </span>/
           <span>{{ item.flavour }} flavour </span>/
           <span *ngIf="item.scoopsAmount">{{ item.scoopsAmount }} scoop(s)</span>

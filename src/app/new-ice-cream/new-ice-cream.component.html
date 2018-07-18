@@ -11,10 +11,9 @@
                     <input type="radio"
                         class="hidden-input" 
                         [id]="type.name"
-                        name="typeChosen"
                         [value]="type.name"
                         formControlName="typeChosen"
-                        required>
+                        >
                     <label class="form-check-label" 
                             [for]="type.name">
                         <img [src]="type.imgPath" alt="">
@@ -29,7 +28,6 @@
                     <input type="radio"
                         class="hidden-input" 
                         id=scoop-{{i}}
-                        name="scoopsAmountChosen"
                         formControlName="scoopsAmountChosen"
                         [value]="scoop"
                         [(ngModel)]="scoopsAmountChosen">
@@ -63,11 +61,10 @@
                     <input type="radio"
                         class="hidden-input" 
                         [id]="flav.name"
-                        name="flavourChosen"
                         formControlName="flavourChosen"
                         [value]="flav.name"
                         [(ngModel)]="flavourChosen"
-                        required>
+                        >
                         
                     <label class="form-check-label" 
                             [for]="flav.name">
