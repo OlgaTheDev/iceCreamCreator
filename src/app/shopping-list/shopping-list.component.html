@@ -1,17 +1,66 @@
 <div class="container-fluid">
-<div class="row">
+<div class="row pt-3">
   <div class="col">
     <h1>Shopping list</h1>
-    <ul class="list-group">
-      <li class="list-group-item"
-          *ngFor="let item of shoppingList"> 
-          <span class="svg-wrapper"></span>
-          <span>{{ item.type | titlecase }} ice-cream </span>/
-          <span>{{ item.flavour }} flavour </span>/
-          <span *ngIf="item.scoopsAmount">{{ item.scoopsAmount }} scoop(s)</span>
-          <span *ngIf="item.shape">{{ item.shape }} shape</span>
+
+    <p class="pt-3" *ngIf="!shoppingList.length">Your shopping cart is empty :(</p>
+
+    <form #slForm="ngForm" (ngSubmit)="onFormSubmit(slForm)">
+        <ul class="list-light px-4"
+            *ngIf="shoppingList.length" >
+        <li class="row"
+            *ngFor="let item of shoppingList; index as i"> 
+            <div class="col-6 d-flex align-items-center">
+                <span class="svg-wrapper"></span>
+                <span>{{ item.type | titlecase }} ice-cream </span>&nbsp;
+                <span>{{ item.flavour }} flavour </span>&nbsp;
+                <span *ngIf="item.scoopsAmount">{{ item.scoopsAmount }} scoop(s)</span>
+                <span *ngIf="item.shape">{{ item.shape }} shape</span>
+            </div>
+            <div class="col-1 align-self-center text-center">
+                <a class="small remove-link"
+                (click)="onDelete(i)">
+                X <span>Remove</span>
+                </a>
+            </div>
+            <div class="col-1 align-self-center text-center feedback-incl-block">
+                <input type="text" 
+                        class="form-control"
+                        [ngClass]="{'is-invalid': qty.invalid && qty.touched}"
+                        #qty="ngModel"
+                        [(ngModel)]="item.quantity"
+                        name="quantity-{{i}}"
+                        (input)="onQuantityChange(qty.valid)"
+                        required
+                        pattern="^[1-9][0-9]?$|^100$">
+                    <div class="invalid-feedback absolute" *ngIf="qty.errors?.pattern"> 
+                        Quantity should be between 1 and 100
+                    </div>	
+            </div>
+            <div class="col-2 align-self-center text-right">{{ item.price | currency}}</div>
+            <div class="col-2 align-self-center text-right">{{ qty.valid ? (item.price * item.quantity | currency) : (item.price | currency)}}</div>
         </li>
-    </ul>
+        <li class="row">
+            <div class="col-10">
+                Order summary
+            </div>
+            <div class="col-2">
+                {{ orderSummary | currency }}
+            </div>
+        </li>
+            
+        </ul>
+    </form>
+
+    <div class="btn-wrapper pt-4 d-flex justify-content-between">
+        <button class="btn btn-info"
+                type="button"
+                routerLink="/new">Return  to ice cream creator</button>
+        <button type="submit" 
+                class="btn btn-success"
+                [disabled]="!slForm.valid">Proceed to checkout</button>
+    </div>
+
   </div>
 </div>
 </div>

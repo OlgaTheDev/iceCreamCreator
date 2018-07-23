@@ -1,28 +1,29 @@
-import { Flavour } from "./flavour.model";
-import { IceCreamType } from "./type.model";
-import { Shape } from "./shape.model";
+import { Flavour } from "../models/flavour.model";
+import { IceCreamType } from "../models/type.model";
+import { Shape } from "../models/shape.model";
+
 
 export class HttpService {
 
     flavours: Flavour[] = [
-        {name: 'strawberry', imgPath: '../../assets/images/strawberry.svg', color: ['#ff655a', '#f44336']},
-        {name: 'raspberry', imgPath: '../../assets/images/raspberry.svg', color: ['#f06292', '#e91e63']},
-        {name: 'chocolate', imgPath: '../../assets/images/chocolate.svg', color: ['#794d3e', '#56362b']},
-        {name: 'lemon', imgPath: '../../assets/images/lemon.svg', color: ['#ffee58', '#fdd835']}
+        {name: 'strawberry', imgPath: '../../assets/images/strawberry.svg', color: ['#ff655a', '#f44336'], price: .59},
+        {name: 'raspberry', imgPath: '../../assets/images/raspberry.svg', color: ['#f06292', '#e91e63'], price: .39},
+        {name: 'chocolate', imgPath: '../../assets/images/chocolate.svg', color: ['#794d3e', '#56362b'], price: .79},
+        {name: 'lemon', imgPath: '../../assets/images/lemon.svg', color: ['#ffee58', '#fdd835'], price: .29}
     ];
 
     scoops: number[] = [1, 2, 3];
 
     types: IceCreamType[] = [
-        {name: 'cone', imgPath: '../../assets/images/cone.svg'},
-        {name: 'stick', imgPath: '../../assets/images/stick.svg'}
+        {name: 'cone', imgPath: '../../assets/images/cone.svg', price: 1.99},
+        {name: 'stick', imgPath: '../../assets/images/stick.svg', price: 1.29}
     ];
 
     shapes: Shape[] = [
-        {name: 'oval', imgPath: '../../assets/images/stick.svg'},
-        {name: 'cylinder', imgPath: '../../assets/images/cylinder.svg'},
-        {name: 'rectangle', imgPath: '../../assets/images/rect.svg'},
-        {name: 'triangle', imgPath: '../../assets/images/triangle.svg'}
+        {name: 'oval', imgPath: '../../assets/images/stick.svg', price: 0},
+        {name: 'cylinder', imgPath: '../../assets/images/cylinder.svg', price: .99},
+        {name: 'rectangle', imgPath: '../../assets/images/rect.svg', price: .49},
+        {name: 'triangle', imgPath: '../../assets/images/triangle.svg', price: .79}
     ];
 
     svgShapes = [

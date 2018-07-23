@@ -2,6 +2,10 @@
     color: #333;
 }
 
+a{
+    cursor: pointer;
+}
+
 .fill { 
     min-height: 100vh;
     height: 100vh;
@@ -15,6 +19,8 @@
         position: relative;
         text-align: center;
         cursor: pointer;
+        font-size: 0.75rem;
+        font-weight: bold;
 
         img{
             display: block;
@@ -24,7 +30,7 @@
             border: 1px solid #eee;
             background-color: #fff;
             padding: 3px;
-            margin: 0 auto;
+            margin: 0 auto 5px;
         }
     }
 
@@ -40,7 +46,7 @@
 }
 
 .square-label{
-    padding: 0 7px;
+    padding: 2px 7px;
     border: 1px solid #eee;
     background-color: white;
     transition: box-shadow .2s ease-in-out;
@@ -49,5 +55,66 @@
 .svg-wrapper{
     svg.preview{
         width: 75px;
+    }
+}
+
+ul.list-light{
+    width: 100%;
+    padding: 0;
+
+    &.small{
+        li{
+            font-size: .9rem;
+
+            &:last-child{
+                font-size: 1.1rem;
+            }
+        }
+    }
+
+    li{
+        padding: 10px 0;
+        border-bottom: 1px solid grey;
+        font-weight: 200;
+        list-style: none;
+
+        &:last-child{
+            border-bottom: 1px solid transparent;
+            text-align: right;
+            font-weight: bold;
+            font-size: 1.3rem;
+
+            span{
+                padding-left: 20px;
+            }
+        }
+    }
+}
+
+.remove-link{
+    transition: color .2s ease-in-out;
+
+    span{
+        transition: color .2s ease-in-out;
+    }
+
+    &:hover, &:focus, &:active{
+        color: red!important;
+
+        span{
+            color: red!important;
+        }
+    }
+}
+
+.feedback-incl-block{
+    position: relative;
+
+    .invalid-feedback{
+        &.absolute{
+            left: -100px;
+            position: absolute;
+            width: 300px;
+        }
     }
 }

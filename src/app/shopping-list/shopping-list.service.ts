@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
+import { IceCream } from '../shared/models/ice-cream.model';
 
-import { IceCream } from '../ice-cream.model';
 
 
 export class ShoppingListService {
@@ -11,6 +11,11 @@ export class ShoppingListService {
 
     addToShoppingList(item: IceCream) {
         this.shoppingList.push(item);
+        this.shoppingListUpdated.next(this.shoppingList);
+    }
+
+    deleteFromShoppingList(id: number) {
+        this.shoppingList.splice(id, 1);
         this.shoppingListUpdated.next(this.shoppingList);
     }
 

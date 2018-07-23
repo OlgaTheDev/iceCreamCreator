@@ -1,9 +1,9 @@
 import { Component, OnInit } from '@angular/core';
 import { ActivatedRoute, ParamMap, Router } from '@angular/router';
+import { svgService } from '../../shared/services/svg.service';
+import { HttpService } from '../../shared/services/http.service';
 
-import { HttpService } from '../../http.service';
-import { Flavour } from '../../flavour.model';
-import { svgService } from '../../svg.service';
+
 
 @Component({
   selector: 'app-ice-cream-preview',

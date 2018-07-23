@@ -1,6 +1,10 @@
 .new-ice-cream{
-    .right{
+    .left, .right{
         background: aliceblue;
+
+        .list-group-item{
+            background-color: transparent;
+        }
     }
 }
 

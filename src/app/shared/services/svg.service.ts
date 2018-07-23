@@ -1,7 +1,7 @@
 import { HttpService } from "./http.service";
 import { Injectable } from "@angular/core";
-import { Flavour } from "./flavour.model";
 import { elementAt } from "rxjs/operator/elementAt";
+import { Flavour } from "../models/flavour.model";
 
 @Injectable()
 export class svgService {

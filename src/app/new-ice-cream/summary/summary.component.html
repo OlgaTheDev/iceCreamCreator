@@ -1,3 +1,25 @@
-<p>
-  summary works!
-</p>
+<div class="summary-wrapper  align-self-end">
+    <h4>Ice cream summary</h4>
+    <ul class="list-light small">
+        <li class="d-flex justify-content-between align-items-center">
+          {{ typeChosen | titlecase }} Ice cream
+          <span>{{ typePrice | currency }}</span>
+        </li>
+        <li *ngIf="scoopsChosen" class="d-flex justify-content-between align-items-center">
+            {{ scoopsChosen }} scoops
+            <span>{{ scoopsPrice | currency }}</span>
+        </li>
+        <li *ngIf="shapeChosen" class="d-flex justify-content-between align-items-center">
+            {{ shapeChosen | titlecase}} shape
+            <span>{{ shapePrice | currency }}</span>
+        </li>
+        <li *ngIf="flavChosen" class="d-flex justify-content-between align-items-center">
+            {{ flavChosen | titlecase}} flavour
+            <span>{{ flavPrice | currency }}</span>
+        </li>
+        <li class="d-flex justify-content-end align-items-center">
+            Total:
+            <span>{{ totalPrice | currency }}</span>
+        </li>
+    </ul>
+</div>
