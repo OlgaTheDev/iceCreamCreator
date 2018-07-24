@@ -1,0 +1,138 @@
+<div *ngIf="formSubmitted" class="jumbotron jumbotron-fluid thx-block">
+    <div class="container">
+      <h1 class="display-4">Thank you for your order!</h1>
+      <p class="lead">The truck is on the way :)</p>
+    </div>
+  </div>
+
+<div *ngIf="!formSubmitted" class="container-fluid checkout-wrapper">
+  <div class="container">
+  <div class="row pt-4">
+    <div class="col">
+      <h3>Please enter your details</h3>
+
+      <form [formGroup]="userForm" (ngSubmit)="onSubmit()" class="pt-2">
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="fName">First name</label>
+                  <input type="text"
+                    id="fName"
+                    formControlName="fName" 
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': !fName.valid && fName.touched,
+                      'is-valid': fName.valid && fName.touched
+                    }">
+                    <div *ngIf="!fName.valid && fName.errors.required" 
+                        class="invalid-feedback">
+                        This field is required.
+                    </div>
+                    <div *ngIf="!fName.valid && fName.errors.minlength" 
+                        class="invalid-feedback">
+                        Must be at least 3 characters long.
+                    </div>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="lName">Last name</label>
+                  <input type="text" 
+                    id="lName"
+                    formControlName="lName" 
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': !lName.valid && lName.touched,
+                      'is-valid': lName.valid && lName.touched
+                    }">
+                    <div *ngIf="!lName.valid && lName.errors.required" 
+                        class="invalid-feedback">
+                        This field is required.
+                    </div>
+                    <div *ngIf="!lName.valid && lName.errors.minlength" 
+                        class="invalid-feedback">
+                        Must be at least 3 characters long.
+                    </div>
+            </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="email">Email</label>
+                  <input type="email" 
+                    id="email"
+                    formControlName="email" 
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': !email.valid && email.touched,
+                      'is-valid': email.valid && email.touched
+                    }">
+                    <div *ngIf="!email.valid && email.errors.required" 
+                        class="invalid-feedback">
+                        This field is required.
+                    </div>
+                    <div *ngIf="!email.valid && email.errors.email" 
+                        class="invalid-feedback">
+                        Please enter a valid email.
+                    </div>
+            </div>
+            <div class="form-group col-md-6">
+                <label for="contact">Contact number</label>
+                <input type="tel" 
+                    id="contact"
+                    formControlName="contactNum" 
+                    class="form-control"
+                    [ngClass]="{
+                      'is-invalid': !contact.valid && contact.touched,
+                      'is-valid': contact.valid && contact.touched
+                    }">
+                    <div *ngIf="!contact.valid && contact.errors.required" 
+                        class="invalid-feedback">
+                        This field is required.
+                    </div>
+                    <div *ngIf="!contact.valid && contact.errors.pattern" 
+                        class="invalid-feedback">
+                        Please enter a valid contact number.
+                    </div>
+            </div>
+          </div>
+          <div class="form-row">
+              <div class="form-group col-md-6">
+                  <label for="city">City</label>
+                  <input type="text" 
+                      id="city"
+                      formControlName="city" 
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': !city.valid && city.touched,
+                        'is-valid': city.valid && city.touched
+                      }">
+                      <div *ngIf="!city.valid && city.errors.required" 
+                          class="invalid-feedback">
+                          This field is required.
+                      </div>
+              </div>
+              <div class="form-group col-md-6">
+                  <label for="address">Address</label>
+                  <input type="text" 
+                      id="address"
+                      formControlName="address" 
+                      class="form-control"
+                      [ngClass]="{
+                        'is-invalid': !address.valid && address.touched,
+                        'is-valid': address.valid && address.touched
+                      }">
+                      <div *ngIf="!address.valid && address.errors.required" 
+                          class="invalid-feedback">
+                          This field is required.
+                      </div>
+              </div>
+            </div>
+
+            <button type="submit" 
+                    class="btn btn-success"
+                    [disabled]="!userForm.valid">Place order</button>
+      </form>
+
+    </div>
+  </div>
+</div>
+<img id="truck" [src]="'../../assets/images/ice-cream-truck.svg'" alt="">
+
+</div>

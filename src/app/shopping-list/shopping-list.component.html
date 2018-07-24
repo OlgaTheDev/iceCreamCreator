@@ -1,5 +1,5 @@
 <div class="container-fluid">
-<div class="row pt-3">
+<div class="row py-3">
   <div class="col">
     <h1>Shopping list</h1>
 
@@ -10,20 +10,20 @@
             *ngIf="shoppingList.length" >
         <li class="row"
             *ngFor="let item of shoppingList; index as i"> 
-            <div class="col-6 d-flex align-items-center">
+            <div class="col-9 col-lg-6 d-flex">
                 <span class="svg-wrapper"></span>
-                <span>{{ item.type | titlecase }} ice-cream </span>&nbsp;
-                <span>{{ item.flavour }} flavour </span>&nbsp;
+                <span>{{ item.type | titlecase }} ice-cream &nbsp;</span>
+                <span>{{ item.flavour }} flavour &nbsp;</span>
                 <span *ngIf="item.scoopsAmount">{{ item.scoopsAmount }} scoop(s)</span>
                 <span *ngIf="item.shape">{{ item.shape }} shape</span>
             </div>
-            <div class="col-1 align-self-center text-center">
+            <div class="col-3 col-lg-1">
                 <a class="small remove-link"
                 (click)="onDelete(i)">
                 X <span>Remove</span>
                 </a>
             </div>
-            <div class="col-1 align-self-center text-center feedback-incl-block">
+            <div class="col-4 col-lg-1 text-center feedback-incl-block">
                 <input type="text" 
                         class="form-control"
                         [ngClass]="{'is-invalid': qty.invalid && qty.touched}"
@@ -33,18 +33,18 @@
                         (input)="onQuantityChange(qty.valid)"
                         required
                         pattern="^[1-9][0-9]?$|^100$">
-                    <div class="invalid-feedback absolute" *ngIf="qty.errors?.pattern"> 
+                    <div class="invalid-feedback absolute" *ngIf="qty.errors?.pattern || !qty.valid"> 
                         Quantity should be between 1 and 100
                     </div>	
             </div>
-            <div class="col-2 align-self-center text-right">{{ item.price | currency}}</div>
-            <div class="col-2 align-self-center text-right">{{ qty.valid ? (item.price * item.quantity | currency) : (item.price | currency)}}</div>
+            <div class="col-4 col-lg-2 text-right">{{ item.price | currency}}</div>
+            <div class="col-4 col-lg-2 text-right">{{ qty.valid ? (item.price * item.quantity | currency) : (item.price | currency)}}</div>
         </li>
-        <li class="row">
-            <div class="col-10">
+        <li class="row sum">
+            <div class="col-9 col-lg-10">
                 Order summary
             </div>
-            <div class="col-2">
+            <div class="col-3 col-lg-2">
                 {{ orderSummary | currency }}
             </div>
         </li>
@@ -52,13 +52,14 @@
         </ul>
     </form>
 
-    <div class="btn-wrapper pt-4 d-flex justify-content-between">
+    <div class="btn-wrapper d-flex">
         <button class="btn btn-info"
                 type="button"
                 routerLink="/new">Return  to ice cream creator</button>
         <button type="submit" 
                 class="btn btn-success"
-                [disabled]="!slForm.valid">Proceed to checkout</button>
+                [disabled]="!slForm.valid"
+                routerLink="/checkout">Proceed to checkout</button>
     </div>
 
   </div>

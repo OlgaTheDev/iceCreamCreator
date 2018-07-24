@@ -4,6 +4,8 @@ import { ShoppingListService } from './shopping-list.service';
 import { svgService } from '../shared/services/svg.service';
 import { IceCream } from '../shared/models/ice-cream.model';
 import { Subscription } from 'rxjs';
+import { NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
 
 
 @Component({
@@ -15,7 +17,8 @@ import { Subscription } from 'rxjs';
 export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private slService: ShoppingListService, 
-              private svgService: svgService) {}
+              private svgService: svgService,
+              private router: Router) {}
 
   shoppingList: IceCream[];
   orderSummary: number;
@@ -51,10 +54,14 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
   onQuantityChange(valid) {
     if (valid) {
       this.slService.shoppingListUpdated.next(this.shoppingList);
-    } else {
-      
     } 
   }
+
+  // onFormSubmit(form: NgForm) {
+  // console.log(form);
+  
+  //   this.router.navigate(['/checkout']);
+  // }
 
   private calcOrderSummary(shoppingList: IceCream[]) {
     let total = 0;

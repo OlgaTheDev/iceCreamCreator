@@ -1,0 +1,30 @@
+.checkout-wrapper{
+    min-height: 100vh;
+    height: auto;
+    position: relative;
+    padding-bottom: calc(30vh + 30px);
+}
+
+#truck{
+    position: absolute;
+    bottom: 10px;
+    left: 10%;
+    max-height: 30vh;
+    max-width: 30vh;
+    transition: .6s ease-in;
+
+    &.go{
+        left: 100%;
+    }
+}
+
+.thx-block{
+    background-color: azure;
+    height: 100vh;
+}
+
+@media screen and (min-width: 992px) {
+    .checkout-wrapper{
+        padding-bottom: 10px;
+    }
+}

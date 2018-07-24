@@ -1,10 +1,19 @@
 .new-ice-cream{
-    .left, .right{
-        background: aliceblue;
+    background: aliceblue;
+    padding-bottom: 80px;
 
+    &.fill{
+        min-height: 100vh;
+    }
+
+    .left, .right{
         .list-group-item{
             background-color: transparent;
         }
+    }
+
+    .center-block{
+        background: white;
     }
 }
 
@@ -41,13 +50,8 @@
     }
 }
 
-.sl-preview{
-    position: fixed;
-    top: 0;
-    right: 0;
-    width: 10%;
-    height: 100px;
-    min-width: 100px;
-    background-color: lightyellow;
-    border: 1px solid #eee;
+@media screen and (min-width: 992px) {
+    .new-ice-cream{
+        padding-bottom: 0;
+    }
 }

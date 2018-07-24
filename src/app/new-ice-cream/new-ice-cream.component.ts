@@ -43,7 +43,7 @@ export class NewIceCreamComponent implements OnInit {
   })
 
   ngOnInit() {    
-    
+
     this.iceCreamType = this.http.getTypes();
     this.flavours = this.http.getFlavours();
     this.shapes = this.http.getShapes();
@@ -126,15 +126,10 @@ export class NewIceCreamComponent implements OnInit {
       this.shapeChosen,
       this.calc.totalPrice,
       1
-    );
-    console.log(this.scoopsAmountChosen);
-    
+    );    
     this.slService.addToShoppingList(newIceCream);
     this.icForm.reset();
     this.router.navigate(['/new'], {queryParams: {}});
   }
-
-
-
 
 }

@@ -1,3 +1,11 @@
 .preview-wrapper{
-    padding-top: 20vh;
+    padding-top: 30px;
+}
+
+
+@media screen and (min-width: 992px) {
+    .preview-wrapper{
+        padding-top: 20vh;
+    }
+
 }

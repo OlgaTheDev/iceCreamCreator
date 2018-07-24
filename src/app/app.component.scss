@@ -7,8 +7,12 @@ a{
 }
 
 .fill { 
-    min-height: 100vh;
-    height: 100vh;
+    min-height: auto;
+    height: auto;
+
+    &.jumbotron{
+        min-height: 100vh;
+    }
 }
 
 .hidden-input{
@@ -88,6 +92,15 @@ ul.list-light{
                 padding-left: 20px;
             }
         }
+
+        div{
+            flex-direction: column;
+            align-self: center;
+
+            &:nth-child(2) {
+                text-align: right;
+            }
+        }
     }
 }
 
@@ -107,14 +120,125 @@ ul.list-light{
     }
 }
 
-.feedback-incl-block{
-    position: relative;
+.sl-preview{
+    position: fixed;
+    bottom: 0;
+    right: 0;
+    width: 100vw;
+    height: auto;
+    background-color: lightyellow;
+    border: 1px solid #eee;
 
-    .invalid-feedback{
-        &.absolute{
-            left: -100px;
-            position: absolute;
-            width: 300px;
+    a{
+        text-align: center;
+        display: flex;
+        justify-content: space-around;
+        padding: 5px 0;
+        &:hover{
+            text-decoration: none;
+        }
+
+        img{
+            width: auto;
+            height: 40px;
+            margin: 0;
+        }
+
+        p{
+            margin-bottom: 0;
+            align-self: center;
+            font-size: 12px;
+            text-align: center;
+        
+            span{
+                font-weight: bold;
+            }
         }
     }
+}
+
+#triggerGoToSL {
+    margin: 0 auto;
+    display: block;
+    width: 100%;
+}
+
+.btn-wrapper{
+    flex-direction: column;
+            
+    .btn{
+        margin-top: 20px;
+    }
+}
+
+
+@media screen and (min-width: 992px) {
+    .fill { 
+        min-height: 100vh;
+        height: auto;
+    }
+
+    ul.list-light{
+        li{
+            div{
+                flex-direction: row;
+                align-items: center;
+            }
+
+            &:not(.center) {
+                div{
+                    &:nth-child(2) {
+                        text-align: center;
+                    }
+                }
+            }
+        }
+    }
+
+    .sl-preview{
+        position: fixed;
+        top: 0;
+        bottom: auto;
+        right: 0;
+        width: 10%;
+        min-height: 100px;
+        height: auto;
+        min-width: 100px;   
+
+        a{
+            display: block;
+            padding: 5px;
+            justify-content: none;
+
+            img{
+                width: 60px;
+                margin: 0 auto;
+                display: block;
+            }
+
+            p{
+                padding-top: 8px;
+            }
+        }
+        
+
+    }
+
+    .btn-wrapper{
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .feedback-incl-block{
+        position: relative;
+    
+        .invalid-feedback{
+            &.absolute{
+                left: -100px;
+                position: absolute;
+                width: 300px;
+            }
+        }
+    }
+
 }

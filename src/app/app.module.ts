@@ -16,6 +16,7 @@ import { HttpService } from './shared/services/http.service';
 import { CalculationService } from './shared/services/calculation.service';
 import { CustomMaxDirective } from './shared/directives/customMax.directive';
 import { CustomMinDirective } from './shared/directives/customMin.directive';
+import { CheckoutComponent } from './checkout/checkout.component';
 
 
 @NgModule({
@@ -29,7 +30,8 @@ import { CustomMinDirective } from './shared/directives/customMin.directive';
     IceCreamPreviewComponent,
     SummaryComponent,
     CustomMaxDirective,
-    CustomMinDirective
+    CustomMinDirective,
+    CheckoutComponent
     ],
   imports: [
     BrowserModule,
