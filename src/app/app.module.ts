@@ -17,6 +17,10 @@ import { CalculationService } from './shared/services/calculation.service';
 import { CustomMaxDirective } from './shared/directives/customMax.directive';
 import { CustomMinDirective } from './shared/directives/customMin.directive';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { AlertComponent } from './alert/alert.component';
+import { AlertService } from './shared/services/alert.service';
+import { FinishComponent } from './finish/finish.component';
+import { CheckoutService } from './checkout/checkout.service';
 
 
 @NgModule({
@@ -31,7 +35,9 @@ import { CheckoutComponent } from './checkout/checkout.component';
     SummaryComponent,
     CustomMaxDirective,
     CustomMinDirective,
-    CheckoutComponent
+    CheckoutComponent,
+    AlertComponent,
+    FinishComponent
     ],
   imports: [
     BrowserModule,
@@ -39,7 +45,7 @@ import { CheckoutComponent } from './checkout/checkout.component';
     FormsModule,
     ReactiveFormsModule
   ],
-  providers: [HttpService, ShoppingListService, CalculationService],
+  providers: [HttpService, ShoppingListService, CalculationService, AlertService, CheckoutService],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

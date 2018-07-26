@@ -6,6 +6,7 @@ import { IceCream } from '../shared/models/ice-cream.model';
 import { Subscription } from 'rxjs';
 import { NgForm } from '@angular/forms';
 import { Router } from '@angular/router';
+import { CheckoutService } from '../checkout/checkout.service';
 
 
 @Component({
@@ -18,19 +19,30 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
 
   constructor(private slService: ShoppingListService, 
               private svgService: svgService,
-              private router: Router) {}
+              private router: Router,
+              private checkout: CheckoutService) {}
 
   shoppingList: IceCream[];
   orderSummary: number;
-  subs: Subscription;
+  subs1: Subscription;
+  subs2: Subscription;
   minNum: number = 1;
   maxNum: number = 1000;
 
   ngOnInit() {
     this.shoppingList = this.slService.shoppingList;
-    this.orderSummary = this.calcOrderSummary(this.shoppingList);       
+    this.orderSummary = this.calcOrderSummary(this.shoppingList);  
 
-    this.subs = this.slService.shoppingListUpdated
+    this.checkout.orderPlaced
+      .subscribe(
+        (isPlaced) => {
+          if (isPlaced) {            
+            this.slService.clearShoppingList();
+          }
+        }
+      )
+
+    this.subs1 = this.slService.shoppingListUpdated
       .subscribe(
         (updatedShoppingList: IceCream[]) => {
           this.shoppingList = updatedShoppingList; 
@@ -44,7 +56,8 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
   }
 
   ngOnDestroy() {
-    this.subs.unsubscribe();
+    this.subs1.unsubscribe();
+    // this.subs2.unsubscribe();
   }
 
   onDelete(id:number) {
@@ -57,11 +70,14 @@ export class ShoppingListComponent implements OnInit, AfterViewInit, OnDestroy {
     } 
   }
 
-  // onFormSubmit(form: NgForm) {
-  // console.log(form);
-  
-  //   this.router.navigate(['/checkout']);
-  // }
+  onFormSubmit(form: NgForm) {
+    // this.router.navigate(['/checkout']);
+  }
+
+  onGoToCheckout() {
+    window.scrollTo(0,0);  
+
+  }
 
   private calcOrderSummary(shoppingList: IceCream[]) {
     let total = 0;

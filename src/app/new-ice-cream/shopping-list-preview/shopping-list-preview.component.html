@@ -1,5 +1,5 @@
-<a routerLink="/shopping-list">
-    <img src="../../../assets/images/ice-cream-truck.svg" alt="">
+<a (click)="onGoToSL()" routerLink="/shopping-list">
+    <img src="./assets/images/ice-cream-truck.svg" alt="">
     <p>The truck is 
       <span *ngIf="!shoppingList.length">empty</span>
       <span *ngIf="shoppingList.length == 1">loaded ({{shoppingList.length}} item)</span>

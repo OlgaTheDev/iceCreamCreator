@@ -56,9 +56,10 @@
         <button class="btn btn-info"
                 type="button"
                 routerLink="/new">Return  to ice cream creator</button>
-        <button type="submit" 
+        <button type="button" 
                 class="btn btn-success"
                 [disabled]="!slForm.valid"
+                (click)="onGoToCheckout()"
                 routerLink="/checkout">Proceed to checkout</button>
     </div>
 

@@ -35,4 +35,8 @@ export class ShoppingListPreviewComponent implements OnInit, OnDestroy {
     this.subs.unsubscribe();
   }
 
+  onGoToSL(){
+    window.scrollTo(0,0);
+  }
+
 }

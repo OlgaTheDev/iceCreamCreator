@@ -1,6 +1,6 @@
 import { Subject } from 'rxjs';
 import { IceCream } from '../shared/models/ice-cream.model';
-
+import { Injectable } from '@angular/core';
 
 
 export class ShoppingListService {
@@ -16,6 +16,11 @@ export class ShoppingListService {
 
     deleteFromShoppingList(id: number) {
         this.shoppingList.splice(id, 1);
+        this.shoppingListUpdated.next(this.shoppingList);
+    }
+
+    clearShoppingList() {
+        this.shoppingList = [];        
         this.shoppingListUpdated.next(this.shoppingList);
     }
 

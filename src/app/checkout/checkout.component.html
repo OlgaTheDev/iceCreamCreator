@@ -1,11 +1,4 @@
-<div *ngIf="formSubmitted" class="jumbotron jumbotron-fluid thx-block">
-    <div class="container">
-      <h1 class="display-4">Thank you for your order!</h1>
-      <p class="lead">The truck is on the way :)</p>
-    </div>
-  </div>
-
-<div *ngIf="!formSubmitted" class="container-fluid checkout-wrapper">
+<div class="container-fluid checkout-wrapper">
   <div class="container">
   <div class="row pt-4">
     <div class="col">
@@ -133,6 +126,6 @@
     </div>
   </div>
 </div>
-<img id="truck" [src]="'../../assets/images/ice-cream-truck.svg'" alt="">
+<img id="truck" #truck [src]="'./assets/images/ice-cream-truck.svg'" alt="">
 
 </div>

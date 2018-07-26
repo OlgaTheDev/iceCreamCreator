@@ -1,5 +1,7 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild, ElementRef } from '@angular/core';
 import { FormControl, FormBuilder, Validators, NgForm } from '@angular/forms';
+import { Router } from '@angular/router';
+import { CheckoutService } from './checkout.service';
 
 @Component({
   selector: 'app-checkout',
@@ -8,9 +10,13 @@ import { FormControl, FormBuilder, Validators, NgForm } from '@angular/forms';
 })
 export class CheckoutComponent implements OnInit {
 
+  @ViewChild('truck') truck: ElementRef;
+
   formSubmitted: boolean = false;
 
-  constructor(private fb: FormBuilder) {}
+  constructor(private fb: FormBuilder,
+              private router: Router,
+              private checkout: CheckoutService) {}
 
   userForm = this.fb.group({
     fName: [null, [Validators.required, Validators.minLength(3)]],
@@ -22,26 +28,18 @@ export class CheckoutComponent implements OnInit {
   })
 
   ngOnInit() {
-    this.userForm.valueChanges
-      .subscribe(
-        (form: NgForm) => {
-          console.log(form);
-          
-        }
-      )
   }
 
-
   onSubmit() {
-    console.log(this.userForm);
     this.goTruck();
     setTimeout(() => {
-      this.formSubmitted = true;
+      this.router.navigate(['/finish']);
+      this.checkout.orderPlaced.next(true);
     }, 600)
   }
 
   private goTruck() {
-    document.getElementById('truck').classList.add('go');
+    this.truck.nativeElement.classList.add('go');
   }
 
   get fName() {

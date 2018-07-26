@@ -10,6 +10,7 @@ import { IceCreamType } from '../shared/models/type.model';
 import { Flavour } from '../shared/models/flavour.model';
 import { Shape } from '../shared/models/shape.model';
 import { IceCream } from '../shared/models/ice-cream.model';
+import { AlertService } from '../shared/services/alert.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class NewIceCreamComponent implements OnInit {
               private slService: ShoppingListService,
               private route: ActivatedRoute,
               private router: Router,
-              private calc: CalculationService) { }
+              private calc: CalculationService,
+              private alert: AlertService) { }
 
   iceCreamType: IceCreamType[];
   flavours: Flavour[];
@@ -33,6 +35,8 @@ export class NewIceCreamComponent implements OnInit {
   scoopsAmountChosen: number = 1;
   shapes: Shape[];
   shapeChosen: string = 'oval';
+  iceCreamAddedSuccess: boolean = false;
+  successMsg: string = 'Ice cream was added successfully!';
 
 
   icForm = new FormGroup({
@@ -43,7 +47,6 @@ export class NewIceCreamComponent implements OnInit {
   })
 
   ngOnInit() {    
-
     this.iceCreamType = this.http.getTypes();
     this.flavours = this.http.getFlavours();
     this.shapes = this.http.getShapes();
@@ -129,7 +132,15 @@ export class NewIceCreamComponent implements OnInit {
     );    
     this.slService.addToShoppingList(newIceCream);
     this.icForm.reset();
-    this.router.navigate(['/new'], {queryParams: {}});
+
+    this.router.navigate(['/new'], {queryParams: {}}).then(()=>{
+      this.alert.showAlert.next({submitted: true, msg: this.successMsg});
+    });
+
+    window.scrollTo(0, 0);
+
   }
+
+
 
 }

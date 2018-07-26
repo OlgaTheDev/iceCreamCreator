@@ -7,6 +7,7 @@ import { NewIceCreamComponent } from './new-ice-cream/new-ice-cream.component';
 import { PageNotFoundComponent } from './page-not-found/page-not-found.component';
 import { ShoppingListComponent } from './shopping-list/shopping-list.component';
 import { CheckoutComponent } from './checkout/checkout.component';
+import { FinishComponent } from './finish/finish.component';
 
 const routes: Routes = [
     {path: '', component: HomeComponent, pathMatch: 'full'},
@@ -14,6 +15,7 @@ const routes: Routes = [
     {path: 'new/:type', component: NewIceCreamComponent},
     {path: 'shopping-list', component: ShoppingListComponent},
     {path: 'checkout', component: CheckoutComponent},
+    {path: 'finish', component: FinishComponent},
     {path: '**', component: PageNotFoundComponent}
 ];
 
